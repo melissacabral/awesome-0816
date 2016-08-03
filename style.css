@@ -1,0 +1,110 @@
+/*
+Theme Name: Awesome 0816
+Author:Melissa Cabral
+Description: A Theme demo for Platt College - Summer 2016
+Author URI: http://melissacabral.com
+License: GPLv3
+Version: 0.1
+
+Any other comments can go here, too.
+*/	
+
+body  {gm 
+  max-width: 60em;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+#header,
+#footer,
+#content,
+#sidebar {
+  padding: 2%;
+  box-sizing: border-box;
+}
+/*
+== Menu
+ */
+.current_page_item{
+  border-bottom:solid 2px red;
+}
+
+
+/*
+== post layout
+*/
+.hentry .wp-post-image{
+  float:right;
+  margin:0 0 1em 1em;
+}
+
+.postmeta{
+  clear:both;
+  background-color: rgba(0,0,0,.2)
+}
+
+img{
+  max-width:100%;
+  height:auto;
+}
+
+.hentry{
+  margin-bottom:3em;
+}
+/*make the sticky posts look different from the rest*/
+.sticky{
+  background-color: lemonchiffon;
+}
+
+/*post formats*/
+.format-quote{
+  background-color: #eee;
+  padding:1em;
+  border-radius:1em;
+  position:relative;
+}
+.format-quote .postmeta{
+  display:none;
+}
+.format-quote:after{
+  /*triangle*/
+  content:'';
+  display: block;
+  position:absolute;
+  left:25%;
+  bottom:-20px;
+  border-left:10px solid #eee;
+  border-top:10px solid #eee;
+  border-bottom:10px solid transparent;
+  border-right:10px solid transparent;
+}
+
+
+@media screen and (min-width:600px) {
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+  }
+  .nav li {
+    display: inline-block;
+  }
+  #content {
+    float: left;
+    width: 70%;
+  }
+  #sidebar {
+    float: right;
+    width: 30%;
+  }
+  /* make the sidebar go to the bottom on the home page */
+  .home #content,
+  .home #sidebar{
+    float:none;
+    width:100%;
+  }
+ 
+  #footer {
+    clear: both;
+  }
+}
