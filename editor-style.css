@@ -1,0 +1,10 @@
+/*these styles apply to the WYSIWYG editor in admin*/
+
+body{
+	background-color: lemonchiffon;
+	font-family: arial, sans-serif;
+	max-width:800px;
+}
+h2{
+	color:slateblue;
+}

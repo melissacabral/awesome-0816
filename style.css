@@ -1,110 +1,280 @@
-/*
-Theme Name: Awesome 0816
-Author:Melissa Cabral
-Description: A Theme demo for Platt College - Summer 2016
-Author URI: http://melissacabral.com
-License: GPLv3
-Version: 0.1
-
-Any other comments can go here, too.
-*/	
-
-body  {gm 
-  max-width: 60em;
-  margin: 0 auto;
+/* todo: remove this later */
+@import "https://fonts.googleapis.com/css?family=Lato:400,400i,700|Playfair+Display:400,900";
+/* Source SCSS is at http://codepen.io/melissacabral/pen/xOaYgq */
+body {
+  margin: 0;
   font-family: sans-serif;
-}
+  font-family: Lato, arial, sans-serif;
+  color: black;
+  background: #eee; }
 
-#header,
-#footer,
-#content,
-#sidebar {
-  padding: 2%;
-  box-sizing: border-box;
-}
-/*
-== Menu
- */
-.current_page_item{
-  border-bottom:solid 2px red;
-}
+.wrapper {
+  max-width: 75em;
+  margin: 0 auto; }
 
+* {
+  box-sizing: border-box; }
 
-/*
-== post layout
-*/
-.hentry .wp-post-image{
-  float:right;
-  margin:0 0 1em 1em;
-}
+img {
+  max-width: 100%;
+  height: auto; }
 
-.postmeta{
-  clear:both;
-  background-color: rgba(0,0,0,.2)
-}
-
-img{
-  max-width:100%;
-  height:auto;
-}
-
-.hentry{
-  margin-bottom:3em;
-}
-/*make the sticky posts look different from the rest*/
-.sticky{
-  background-color: lemonchiffon;
-}
-
-/*post formats*/
-.format-quote{
-  background-color: #eee;
-  padding:1em;
-  border-radius:1em;
-  position:relative;
-}
-.format-quote .postmeta{
-  display:none;
-}
-.format-quote:after{
-  /*triangle*/
-  content:'';
-  display: block;
-  position:absolute;
-  left:25%;
-  bottom:-20px;
-  border-left:10px solid #eee;
-  border-top:10px solid #eee;
-  border-bottom:10px solid transparent;
-  border-right:10px solid transparent;
-}
-
-
-@media screen and (min-width:600px) {
-  ul,
-  li {
+#header {
+  text-align: center;
+  color: white;
+  background-image: url("http://lorempixel.com/output/abstract-q-c-1200-400-9.jpg");
+  background-size: cover;
+  /* ==small menu */ }
+  @media (min-width: 600px) {
+    #header {
+      min-height: 40vh;
+      text-align: left;
+      border-bottom: solid 3px dodgerblue; } }
+  #header h2 {
+    display: none; }
+    @media (min-width: 600px) {
+      #header h2 {
+        display: block; } }
+  #header a {
+    color: white; }
+  #header .custom-logo-link {
+    display: block;
+    background-color: dodgerblue;
+    overflow: hidden; }
+    @media (min-width: 600px) {
+      #header .custom-logo-link {
+        width: 180px;
+        height: 50px; } }
+    #header .custom-logo-link img {
+      max-width: 100%;
+      height: auto; }
+  #header h1 {
+    background: #000;
     margin: 0;
-    padding: 0;
-  }
-  .nav li {
-    display: inline-block;
-  }
-  #content {
-    float: left;
-    width: 70%;
-  }
-  #sidebar {
+    line-height: 50px;
+    font-size: 16px; }
+    #header h1:after {
+      display: block;
+      content: '';
+      clear: both; }
+  @media (min-width: 600px) {
+    #header .search-form {
+      position: absolute;
+      top: 60px;
+      right: 1em; } }
+  #header .header-bar {
+    background: rgba(0, 0, 0, 0.6); }
+    #header .header-bar:after {
+      display: block;
+      content: '';
+      clear: both; }
+    @media (min-width: 600px) {
+      #header .header-bar {
+        background: black;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100; }
+        .admin-bar #header .header-bar {
+          top: 46px; } }
+    @media screen and (min-width: 600px) and (min-width: 783px) {
+      .admin-bar #header .header-bar {
+        top: 32px; } }
+
+    #header .header-bar ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none; }
+      @media (min-width: 600px) {
+        #header .header-bar ul {
+          position: absolute;
+          top: 0;
+          right: 0;
+          background: #000;
+          margin-left: 180px;
+          /* space for logo */ } }
+    #header .header-bar li {
+      width: 50%;
+      float: left;
+      border-bottom: solid 1px gray;
+      border-right: solid 1px gray;
+      position: relative; }
+      @media (min-width: 600px) {
+        #header .header-bar li {
+          display: inline-block;
+          float: none;
+          width: auto;
+          border: none; } }
+      #header .header-bar li a {
+        padding: 5%;
+        display: block; }
+        #header .header-bar li a:hover, #header .header-bar li a:focus {
+          background: dodgerblue; }
+        @media (min-width: 600px) {
+          #header .header-bar li a {
+            padding: 0 1em;
+            line-height: 50px; } }
+      #header .header-bar li ul {
+        display: none;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        min-width: 320px; }
+
+#content {
+  padding: 2%;
+  background: white; }
+  @media (min-width: 600px) {
+    #content {
+      width: 70%;
+      float: left;
+      position: relative;
+      top: -2em;
+      left: 2%;
+      box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2); } }
+  #content .hentry {
+    margin: 2em 0;
+    line-height: 1.5;
+    font-size: 1.1em; }
+    #content .hentry .postmeta {
+      background: rgba(0, 0, 0, 0.1);
+      padding: 2%;
+      font-size: .8em;
+      clear: both; }
+      #content .hentry .postmeta span {
+        padding-right: 1.4em;
+        opacity: .7; }
+  #content .wp-post-image.size-thumbnail {
     float: right;
-    width: 30%;
-  }
-  /* make the sidebar go to the bottom on the home page */
-  .home #content,
-  .home #sidebar{
-    float:none;
-    width:100%;
-  }
- 
-  #footer {
-    clear: both;
-  }
-}
+    margin-left: 1em; }
+
+#sidebar {
+  padding: 2%; }
+  @media (min-width: 600px) {
+    #sidebar {
+      width: 30%;
+      float: right; } }
+
+#footer {
+  text-align: center;
+  clear: both;
+  padding: 2%;
+  border-top: solid 1px rgba(0, 0, 0, 0.15); }
+
+/* ==typography */
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 900; }
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none; }
+
+a {
+  text-decoration: none;
+  color: darkslategray; }
+
+/*  ==widgets */
+.widget {
+  padding: 1em; }
+
+/* ==wordpress core */
+.alignnone {
+  margin: 5px 20px 20px 0; }
+
+.aligncenter,
+div.aligncenter {
+  display: block;
+  margin: 5px auto 5px auto; }
+
+.alignright {
+  float: right;
+  margin: 5px 0 20px 20px; }
+
+.alignleft {
+  float: left;
+  margin: 5px 20px 20px 0; }
+
+a img.alignright {
+  float: right;
+  margin: 5px 0 20px 20px; }
+
+a img.alignnone {
+  margin: 5px 20px 20px 0; }
+
+a img.alignleft {
+  float: left;
+  margin: 5px 20px 20px 0; }
+
+a img.aligncenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.wp-caption {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  max-width: 96%;
+  /* Image does not overflow the content area */
+  padding: 5px 3px 10px;
+  text-align: center; }
+
+.wp-caption.alignnone {
+  margin: 5px 20px 20px 0; }
+
+.wp-caption.alignleft {
+  margin: 5px 20px 20px 0; }
+
+.wp-caption.alignright {
+  margin: 5px 0 20px 20px; }
+
+.wp-caption img {
+  border: 0 none;
+  height: auto;
+  margin: 0;
+  max-width: 98.5%;
+  padding: 0;
+  width: auto; }
+
+.wp-caption p.wp-caption-text {
+  font-size: 11px;
+  line-height: 17px;
+  margin: 0;
+  padding: 0 4px 5px; }
+
+/* Text meant only for screen readers. */
+.screen-reader-text,
+header h2 {
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden; }
+
+.screen-reader-text:focus {
+  background-color: #f1f1f1;
+  border-radius: 3px;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+  clip: auto !important;
+  color: #21759b;
+  display: block;
+  font-size: 14px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  height: auto;
+  left: 5px;
+  line-height: normal;
+  padding: 15px 23px 14px;
+  text-decoration: none;
+  top: 5px;
+  width: auto;
+  z-index: 100000;
+  /* Above WP toolbar. */ }
+
+/*# sourceMappingURL=style.css.map */
