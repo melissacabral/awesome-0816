@@ -24,15 +24,13 @@
 		<h2><?php bloginfo( 'description' ); ?></h2>
 
 
-		<nav class="menu">
-			<ul>
-				<?php wp_list_pages( array(
-					'depth' 	=> 1,
-					'title_li' 	=> '',
-					// 'exclude' 	=> '735,174', //list of page IDs to hide
-					) ); ?>
-			</ul>
-		</nav>
+		<?php wp_nav_menu( array(
+			'theme_location' 	=> 'main_menu', //registered in functions.php
+			'container'			=> 'nav', //wrap in <nav> instead of <div>
+			'container_class' 	=> 'menu', // <nav class="menu">
+			'menu_class'		=> '', //no class on the <ul>
+			'fallback_cb'		=> '',  //if no menu, do nothing
+		) ); ?>
 
 		<?php get_search_form(); //include searchform.php OR WP's default search form ?>
 		</div>

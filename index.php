@@ -39,9 +39,11 @@
 			<!-- end postmeta -->
 		</article>
 		<!-- end post -->
-		<?php 
-			}//end while
-		}else{ ?>
+		<?php }//end while ?>
+
+		<?php awesome_pagination(); ?>
+
+		<?php }else{ ?>
 			<h2>Sorry, no posts to show</h2>
 		<?php } //end of THE LOOP ?>
 		

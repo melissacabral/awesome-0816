@@ -70,8 +70,45 @@ function awesome_comment_reply(){
 	}
 }
 
+/**
+ * Add 3 menu areas
+ * Don't forget to put wp_nav_menu in your templates to display menus
+ * Then go to appearance > menus to configure!
+ */
+add_action( 'init', 'awesome_menu_areas' );
+function awesome_menu_areas(){
+	register_nav_menus( array(
+		'main_menu' => 'Main Navigation Area',
+		'footer_menu' => 'Footer Navigation Area',
+		'social_menu' => 'Social Media Links',
+	) );
+}
 
-
+/**
+ * Helper function:  pagination
+ * just call this func wherever you want pagination links
+ */
+function awesome_pagination(){
+	echo '<div class="pagination">';
+	//are we viewing a single post?
+	if( is_singular() ){
+		previous_post_link( '%link' , '&larr; Older Post');
+		next_post_link( '%link', 'Newer Post &rarr;' );
+	}else{
+		//archive 
+		if( function_exists( 'the_posts_pagination') && !wp_is_mobile() ){
+				the_posts_pagination( array(
+					'next_text' => 'Next Page &rarr;',
+					'prev_text' => '&larr;',
+					'mid_size' 	=> 2,  //show more numbers in the middle 
+			) );
+		}else{
+			previous_posts_link('&larr; Newer Posts'); 
+			next_posts_link('Older Posts &rarr;'); 
+		}
+	}
+	echo '</div>';
+}
 
 
 //no close php!

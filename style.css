@@ -34,15 +34,15 @@ img {
   color: white;
   background-image: url("http://lorempixel.com/output/abstract-q-c-1200-400-9.jpg");
   background-size: cover;
-  /* ==small menu */ }
-  @media (min-width: 600px) {
+  /* == menu */ }
+  @media (min-width: 650px) {
     #header {
       min-height: 40vh;
       text-align: left;
       border-bottom: solid 3px dodgerblue; } }
   #header h2 {
     display: none; }
-    @media (min-width: 600px) {
+    @media (min-width: 650px) {
       #header h2 {
         display: block; } }
   #header a {
@@ -51,7 +51,7 @@ img {
     display: block;
     background-color: dodgerblue;
     overflow: hidden; }
-    @media (min-width: 600px) {
+    @media (min-width: 650px) {
       #header .custom-logo-link {
         width: 180px;
         height: 50px; } }
@@ -67,8 +67,9 @@ img {
       display: block;
       content: '';
       clear: both; }
-  @media (min-width: 600px) {
+  @media (min-width: 650px) {
     #header .search-form {
+      z-index: 50;
       position: absolute;
       top: 60px;
       right: 1em; } }
@@ -78,7 +79,7 @@ img {
       display: block;
       content: '';
       clear: both; }
-    @media (min-width: 600px) {
+    @media (min-width: 650px) {
       #header .header-bar {
         background: black;
         position: fixed;
@@ -88,54 +89,64 @@ img {
         z-index: 100; }
         .admin-bar #header .header-bar {
           top: 46px; } }
-    @media screen and (min-width: 600px) and (min-width: 783px) {
+    @media screen and (min-width: 650px) and (min-width: 783px) {
       .admin-bar #header .header-bar {
         top: 32px; } }
 
+    @media (min-width: 650px) {
+      #header .header-bar nav {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: #000;
+        margin-left: 180px;
+        /* space for logo */ } }
     #header .header-bar ul {
       margin: 0;
       padding: 0;
       list-style-type: none; }
-      @media (min-width: 600px) {
-        #header .header-bar ul {
-          position: absolute;
-          top: 0;
-          right: 0;
-          background: #000;
-          margin-left: 180px;
-          /* space for logo */ } }
     #header .header-bar li {
-      width: 50%;
-      float: left;
+      width: 100%;
       border-bottom: solid 1px gray;
       border-right: solid 1px gray;
       position: relative; }
-      @media (min-width: 600px) {
+      #header .header-bar li:hover > a {
+        background: dodgerblue; }
+      @media (min-width: 650px) {
         #header .header-bar li {
           display: inline-block;
           float: none;
           width: auto;
           border: none; } }
       #header .header-bar li a {
-        padding: 5%;
+        padding: 2.5%;
         display: block; }
         #header .header-bar li a:hover, #header .header-bar li a:focus {
           background: dodgerblue; }
-        @media (min-width: 600px) {
+        @media (min-width: 650px) {
           #header .header-bar li a {
             padding: 0 1em;
             line-height: 50px; } }
       #header .header-bar li ul {
         display: none;
-        position: absolute;
-        bottom: 0;
-        left: 0;
+        background: rgba(30, 144, 255, 0.6);
         min-width: 320px; }
+        @media (min-width: 650px) {
+          #header .header-bar li ul {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 100; } }
+        #header .header-bar li ul li {
+          display: block;
+          float: none; }
+      #header .header-bar li:hover ul {
+        display: block; }
 
 #content {
   padding: 2%;
   background: white; }
-  @media (min-width: 600px) {
+  @media (min-width: 650px) {
     #content {
       width: 70%;
       float: left;
@@ -161,7 +172,7 @@ img {
 
 #sidebar {
   padding: 2%; }
-  @media (min-width: 600px) {
+  @media (min-width: 650px) {
     #sidebar {
       width: 30%;
       float: right; } }
@@ -189,6 +200,21 @@ li {
 a {
   text-decoration: none;
   color: darkslategray; }
+
+/* ==pagination */
+.pagination {
+  text-align: center;
+  clear: both; }
+  .pagination a, .pagination span {
+    background: rgba(0, 0, 0, 0.1);
+    padding: .5em 3%;
+    display: inline-block;
+    margin: .1em; }
+  .pagination .current {
+    background: dodgerblue;
+    color: white; }
+  .pagination .dots {
+    background: transparent; }
 
 /*  ==widgets */
 .widget {

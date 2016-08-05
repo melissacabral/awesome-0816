@@ -1,4 +1,12 @@
 <aside id="sidebar">
+		
+		<?php wp_nav_menu( array(
+			'theme_location' 	=> 'social_menu',
+			'fallback_cb' 		=> '',
+			'container_class'	=> 'social-icons',
+		) ); ?>
+
+
 		<section id="categories" class="widget">
 			<h3 class="widget-title"> Categories </h3>
 			<ul>

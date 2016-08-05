@@ -15,8 +15,9 @@ Any other comments can go here, too.
 $text-color:    black;
 $link-color:    darkslategray;
 $accent-color:  dodgerblue;
+$secondary-color:rgba(black, .1);
 
-$tablet-width:  600px;
+$tablet-width:  650px;
 $desktop-width: 1000px;
 
 $max-width:75em;
@@ -97,13 +98,13 @@ img{
   }
   .custom-logo-link {
     display: block;
-     background-color:$accent-color;
-     overflow:hidden;
+    background-color:$accent-color;
+    overflow:hidden;
     @include tablet {
-      
+
       width:180px;
       height:50px;
-     
+
     }
     img{
       max-width:100%;
@@ -119,13 +120,14 @@ img{
   }
   .search-form{
     @include tablet{
+      z-index:50;
       position:absolute;
       top:60px;
       right:1em;
     }
   }
   
-  /* ==small menu */
+  /* == menu */
   .header-bar {
     background: rgba(0, 0, 0, .6);
     @include clearfix;
@@ -138,11 +140,7 @@ img{
       z-index: 100;
       @include admin-sticky-fix;
     }
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style-type: none;
-
+    nav{
       @include tablet {
         position: absolute;
         top: 0;
@@ -151,12 +149,20 @@ img{
         margin-left:180px; /* space for logo */
       }
     }
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;      
+    }
     li {
-      width: 50%;
-      float: left;
+      width: 100%;
+      // float: left;
       border-bottom: solid 1px gray;
       border-right: solid 1px gray;
       position: relative;
+      &:hover > a{
+        background: $accent-color;
+      }
 
       @include tablet {
         display: inline-block;
@@ -165,7 +171,7 @@ img{
         border: none;
       }
       a {
-        padding: 5%;
+        padding: 2.5%;
         display: block;
         &:hover,
         &:focus {
@@ -176,13 +182,25 @@ img{
           line-height: 50px;
         }
       }
-      //submenus
+      //TODO: submenus
       ul{
         display: none;
-        position:absolute;
-        bottom:0;
-        left:0;
+        background: rgba($accent-color, .6);
+        @include tablet{
+          position:absolute;
+          top:100%;
+          left:0;
+          z-index: 100;
+        }        
         min-width:320px;
+
+        li{
+          display: block;
+          float:none;
+        }
+      }
+      &:hover ul{
+        display: block;
       }
     }
   }
@@ -204,7 +222,7 @@ img{
     line-height: 1.5;
     font-size: 1.1em;
     .postmeta {
-      background: rgba(black, .1);
+      background: $secondary-color;
       padding: 2%;
       font-size: .8em;
       clear: both;
@@ -258,7 +276,24 @@ a {
   color: $link-color;
 }
 
-
+/* ==pagination */
+.pagination{
+  text-align: center;
+  clear:both;
+  a, span{
+    background: $secondary-color;
+    padding:.5em 3%;
+    display: inline-block;
+    margin:.1em;
+  }
+  .current{
+    background: $accent-color;
+    color:white;
+  }
+  .dots{
+    background: transparent;
+  }
+}
 /*  ==widgets */
 
 .widget {
@@ -377,3 +412,4 @@ header h2 {
   z-index: 100000;
   /* Above WP toolbar. */
 }
+

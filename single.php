@@ -21,6 +21,13 @@
 						the_post_thumbnail('large');
 
 						the_content();
+						
+						//for posts with <!--nextpage-->
+						wp_link_pages( array( 
+							'before' => '<div class="post-pages"> Keep Reading this post: ',
+							'after'  => '</div>',
+							'next_or_number' => 'number',
+						 ) ); 
 					}else{
 				//show the featured image
 						the_post_thumbnail('thumbnail');
@@ -42,9 +49,11 @@
 
 	<?php comments_template(); //include comments.php or default comments ?>
 
-	<?php 
-		}//end while
-	}else{ ?>
+	<?php }//end while ?>
+
+	<?php awesome_pagination(); ?>
+
+	<?php }else{ ?>
 		<h2>Sorry, no posts to show</h2>
 		<?php } //end of THE LOOP ?>
 
