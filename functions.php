@@ -110,5 +110,53 @@ function awesome_pagination(){
 	echo '</div>';
 }
 
+/**
+ * Register all the widget areas we need
+ * Call dynamic_sidebar() in the templates to display 
+ */
+add_action( 'widgets_init', 'awesome_widget_areas' );
+function awesome_widget_areas(){
+	register_sidebar( array(
+		'name' 			=> 'Home Area',
+		'id' 			=> 'home-area',
+		'description' 	=> 'appears on the front page near the middle of the page',
+		'before_widget' => '<section class="widget %2$s" id="%1$s">',
+		'after_widget' 	=> '</section>',
+		'before_title' 	=> '<h2 class="widget-title">',
+		'after_title'	=> '</h2>',
+	));
+
+	register_sidebar( array(
+		'name' 			=> 'Blog Sidebar',
+		'id' 			=> 'blog-sidebar',
+		'description' 	=> 'These widgets will appear next to the blog and search results',
+		'before_widget' => '<section class="widget %2$s" id="%1$s">',
+		'after_widget' 	=> '</section>',
+		'before_title' 	=> '<h2 class="widget-title">',
+		'after_title'	=> '</h2>',
+	));
+
+	register_sidebar( array(
+		'name' 			=> 'Page Sidebar',
+		'id' 			=> 'page-sidebar',
+		'description' 	=> 'appears next to static pages',
+		'before_widget' => '<section class="widget %2$s" id="%1$s">',
+		'after_widget' 	=> '</section>',
+		'before_title' 	=> '<h2 class="widget-title">',
+		'after_title'	=> '</h2>',
+	));
+	register_sidebar( array(
+		'name' 			=> 'Footer Area',
+		'id' 			=> 'footer-area',
+		'description' 	=> 'appears on the bottom of everything',
+		'before_widget' => '<section class="widget %2$s" id="%1$s">',
+		'after_widget' 	=> '</section>',
+		'before_title' 	=> '<h2 class="widget-title">',
+		'after_title'	=> '</h2>',
+	));
+
+	
+}
+
 
 //no close php!

@@ -21,6 +21,9 @@ body {
 .wrapper {
   max-width: 75em;
   margin: 0 auto; }
+  @media (min-width: 700px) {
+    .wrapper {
+      padding: 2%; } }
 
 * {
   box-sizing: border-box; }
@@ -35,14 +38,14 @@ img {
   background-image: url("http://lorempixel.com/output/abstract-q-c-1200-400-9.jpg");
   background-size: cover;
   /* == menu */ }
-  @media (min-width: 650px) {
+  @media (min-width: 700px) {
     #header {
       min-height: 40vh;
       text-align: left;
       border-bottom: solid 3px dodgerblue; } }
   #header h2 {
     display: none; }
-    @media (min-width: 650px) {
+    @media (min-width: 700px) {
       #header h2 {
         display: block; } }
   #header a {
@@ -51,7 +54,7 @@ img {
     display: block;
     background-color: dodgerblue;
     overflow: hidden; }
-    @media (min-width: 650px) {
+    @media (min-width: 700px) {
       #header .custom-logo-link {
         width: 180px;
         height: 50px; } }
@@ -67,7 +70,7 @@ img {
       display: block;
       content: '';
       clear: both; }
-  @media (min-width: 650px) {
+  @media (min-width: 700px) {
     #header .search-form {
       z-index: 50;
       position: absolute;
@@ -79,7 +82,7 @@ img {
       display: block;
       content: '';
       clear: both; }
-    @media (min-width: 650px) {
+    @media (min-width: 700px) {
       #header .header-bar {
         background: black;
         position: fixed;
@@ -89,11 +92,11 @@ img {
         z-index: 100; }
         .admin-bar #header .header-bar {
           top: 46px; } }
-    @media screen and (min-width: 650px) and (min-width: 783px) {
+    @media screen and (min-width: 700px) and (min-width: 783px) {
       .admin-bar #header .header-bar {
         top: 32px; } }
 
-    @media (min-width: 650px) {
+    @media (min-width: 700px) {
       #header .header-bar nav {
         position: absolute;
         top: 0;
@@ -112,7 +115,7 @@ img {
       position: relative; }
       #header .header-bar li:hover > a {
         background: dodgerblue; }
-      @media (min-width: 650px) {
+      @media (min-width: 700px) {
         #header .header-bar li {
           display: inline-block;
           float: none;
@@ -123,7 +126,7 @@ img {
         display: block; }
         #header .header-bar li a:hover, #header .header-bar li a:focus {
           background: dodgerblue; }
-        @media (min-width: 650px) {
+        @media (min-width: 700px) {
           #header .header-bar li a {
             padding: 0 1em;
             line-height: 50px; } }
@@ -131,7 +134,7 @@ img {
         display: none;
         background: rgba(30, 144, 255, 0.6);
         min-width: 320px; }
-        @media (min-width: 650px) {
+        @media (min-width: 700px) {
           #header .header-bar li ul {
             position: absolute;
             top: 100%;
@@ -145,15 +148,17 @@ img {
 
 #content {
   padding: 2%;
-  background: white; }
-  @media (min-width: 650px) {
+  background: white;
+  /* full width main content*/ }
+  @media (min-width: 700px) {
     #content {
-      width: 70%;
+      box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2); } }
+  @media (min-width: 700px) {
+    #content {
+      width: 68%;
       float: left;
       position: relative;
-      top: -2em;
-      left: 2%;
-      box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2); } }
+      top: -6em; } }
   #content .hentry {
     margin: 2em 0;
     line-height: 1.5;
@@ -169,16 +174,19 @@ img {
   #content .wp-post-image.size-thumbnail {
     float: right;
     margin-left: 1em; }
+  .page-template-template-no-sidebar #content, .home.page #content {
+    width: 98%;
+    float: none;
+    left: 0; }
 
-#sidebar {
-  padding: 2%; }
-  @media (min-width: 650px) {
-    #sidebar {
-      width: 30%;
-      float: right; } }
+@media (min-width: 700px) {
+  #sidebar {
+    width: 30%;
+    float: right; } }
+#sidebar ul li {
+  padding-left: 1rem; }
 
 #footer {
-  text-align: center;
   clear: both;
   padding: 2%;
   border-top: solid 1px rgba(0, 0, 0, 0.15); }
@@ -219,6 +227,59 @@ a {
 /*  ==widgets */
 .widget {
   padding: 1em; }
+  .widget.widget_calendar table {
+    table-layout: fixed;
+    width: 100%; }
+    .widget.widget_calendar table td, .widget.widget_calendar table th {
+      background: white;
+      padding: 4% 3%;
+      text-align: center;
+      vertical-align: center; }
+    .widget.widget_calendar table th {
+      background-color: dodgerblue; }
+    .widget.widget_calendar table #today {
+      background: rgba(30, 144, 255, 0.2); }
+  #footer .widget {
+    font-size: .8em;
+    width: 50%;
+    float: left; }
+    #footer .widget:nth-child(2n+1) {
+      clear: both; }
+    @media (min-width: 700px) {
+      #footer .widget {
+        width: 33%;
+        float: left; }
+        #footer .widget:nth-child(2n+1) {
+          clear: none; }
+        #footer .widget:nth-child(3n+1) {
+          clear: both; } }
+    @media (min-width: 1000px) {
+      #footer .widget {
+        width: 25%; }
+        #footer .widget:nth-child(3n+1) {
+          clear: none; }
+        #footer .widget:nth-child(4n+1) {
+          clear: both; } }
+  .home-widgets .widget {
+    width: 48%;
+    margin-right: 2%;
+    margin-bottom: 10%;
+    float: left;
+    padding: 2%;
+    background: white; }
+    @media (min-width: 700px) {
+      .home-widgets .widget {
+        box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2); } }
+    .home-widgets .widget:nth-child(2n+1) {
+      clear: both; }
+    @media (min-width: 700px) {
+      .home-widgets .widget {
+        width: 31.333%;
+        float: left; }
+        .home-widgets .widget:nth-child(2n+1) {
+          clear: none; }
+        .home-widgets .widget:nth-child(3n+1) {
+          clear: both; } }
 
 /* ==wordpress core */
 .alignnone {

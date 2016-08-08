@@ -32,6 +32,6 @@
 	<!-- end #content -->
 
 
-<?php get_sidebar(); //include sidebar.php ?>
+<?php get_template_part( 'section', 'homewidgets' ); //include section-homewidgets.php ?>
 </div><!-- end wrapper -->
 <?php get_footer(); //include footer.php ?>

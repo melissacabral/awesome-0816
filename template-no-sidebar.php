@@ -1,4 +1,11 @@
-<?php get_header();  //include header.php ?>
+<?php 
+/*
+Template Name: Page with no sidebar
+
+this is a custom page template. apply it by editing any page and choosing it from the template dropdown.
+*/
+
+get_header();  //include header.php ?>
 <div class="wrapper">
 	<main id="content">
 		<?php //THE LOOP
@@ -33,6 +40,6 @@
 	<!-- end #content -->
 
 
-<?php get_sidebar('page'); //include sidebar-page.php ?>
+
 </div><!-- end wrapper -->
 <?php get_footer(); //include footer.php ?>

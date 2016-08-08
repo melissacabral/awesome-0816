@@ -1,4 +1,10 @@
 <aside id="sidebar">
+
+		<?php 
+		//display the widget area (registered in functions.php)
+		if( ! dynamic_sidebar( 'blog-sidebar' ) ){ 
+			//fallback HTML if no widgets:
+			?>
 		
 		<?php wp_nav_menu( array(
 			'theme_location' 	=> 'social_menu',
@@ -72,5 +78,6 @@
 			} 
 			?>
 		</section>
-	</aside>
-	<!-- end #sidebar -->
+
+		<?php } //end if no widget area ?> 
+</aside><!-- end #sidebar -->

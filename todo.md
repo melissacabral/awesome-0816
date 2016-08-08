@@ -2,5 +2,10 @@ todo
 =====
 * Style social media menu
 * style pagination
-* style dropdown menus
+* style current page menu link
 * style product pages
+
+
+done
+====
+* style dropdown menus
