@@ -20,6 +20,23 @@
 			</div>
 			
 		</article>
+
+
+		<?php 
+		//front page is weird about getting the ID, 
+		//so use this instead of get_post_id
+		$id = get_option( 'page_on_front' );
+
+		$about = get_post_meta( $id, 'about_box', true ); 
+		if($about){
+			?>
+			<section class="about-text">
+				<?php echo $about; ?>
+			</section>
+			<?php 
+		}
+		?>
+
 		<!-- end post -->
 		<?php 
 			}//end while

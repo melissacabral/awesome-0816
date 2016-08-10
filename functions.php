@@ -159,4 +159,16 @@ function awesome_widget_areas(){
 }
 
 
+// add jquery!
+add_action( 'wp_enqueue_scripts', 'awesome_scripts' );
+function awesome_scripts(){
+
+	//attach jquery (built in to WP)
+	wp_enqueue_script( 'jquery' );
+	//attach our custom js
+	$js = get_stylesheet_directory_uri() . '/js/main.js';
+	wp_enqueue_script( 'awesome-js', $js, array('jquery') );
+}
+
+
 //no close php!
