@@ -1,12 +1,15 @@
 /*
 Theme Name: Awesome 0816
+Text Domain: awesome-0816
 Author:Melissa Cabral
 Description: A Theme demo for Platt College - Summer 2016
 Author URI: http://melissacabral.com
 License: GPLv3
 Version: 0.1
 
-Any other comments can go here, too.
+License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
+
+
 */  
 
 /* todo: remove this later */
@@ -501,6 +504,14 @@ header h2 {
   width: auto;
   z-index: 100000;
   /* Above WP toolbar. */
+}
+
+.commentlist li{
+  padding-left:1em;
+}
+
+.sticky, .gallery-caption,  .bypostauthor{
+  text-decoration: none;
 }
 
 

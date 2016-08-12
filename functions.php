@@ -2,6 +2,11 @@
 //wordpress will include this file at the top of every page 
 //of the theme, admin, login, feeds...
 
+//the width of auto-embeds, like youtube, vimeo, twitter, etc
+if ( ! isset( $content_width ) ) $content_width = 670;
+
+
+
 add_theme_support( 'post-thumbnails' );
 add_theme_support( 'post-formats', array( 'quote', 'image', 'gallery', 'audio', 'video', 'chat', 'aside', 'status', 'link' ) );
 
@@ -14,16 +19,16 @@ add_theme_support( 'custom-background' );
 
 //don't forget to add header_image() somewhere in your templates
 add_theme_support( 'custom-header', array(
-					'width' => 1200,
-					'height' => 400,
-					'flex-height' => true,
-				) );
+	'width' => 1200,
+	'height' => 400,
+	'flex-height' => true,
+	) );
 
 //put the_custom_logo() anywhere in your templates
 add_theme_support( 'custom-logo', array( 
-					'width' => 180,
-					'height' => 50,
-				 ) );
+	'width' => 180,
+	'height' => 50,
+	) );
 
 add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
 
@@ -81,7 +86,7 @@ function awesome_menu_areas(){
 		'main_menu' => 'Main Navigation Area',
 		'footer_menu' => 'Footer Navigation Area',
 		'social_menu' => 'Social Media Links',
-	) );
+		) );
 }
 
 /**
@@ -90,18 +95,41 @@ function awesome_menu_areas(){
  */
 function awesome_pagination(){
 	echo '<div class="pagination">';
-	//are we viewing a single post?
-	if( is_singular() ){
+	//are we viewing a single product?
+	if( is_singular('product') ){
+		//fancy pagination with post thumbnails
+		$next_product = get_next_post();
+		$prev_product = get_previous_post();
+		?>
+		<h3>More Products:</h3>
+
+		<?php if($prev_product){ ?>
+			<a href="<?php echo get_permalink( $prev_product ); ?>">
+				<?php echo get_the_post_thumbnail( $prev_product, 'thumbnail' ); ?>
+				<h4><?php echo $prev_product->post_title; ?></h4>
+			</a>
+		<?php } //end if prev product exists 
+
+		if($next_product){
+			?>		
+			<a href="<?php echo get_permalink( $next_product ); ?>">
+				<?php echo get_the_post_thumbnail( $next_product, 'thumbnail' ); ?>
+				<h4><?php echo $next_product->post_title; ?></h4>
+			</a>
+			<?php
+		} //end if next product 
+
+	}elseif( is_singular('post') ){
 		previous_post_link( '%link' , '&larr; Older Post');
 		next_post_link( '%link', 'Newer Post &rarr;' );
 	}else{
 		//archive 
 		if( function_exists( 'the_posts_pagination') && !wp_is_mobile() ){
-				the_posts_pagination( array(
-					'next_text' => 'Next Page &rarr;',
-					'prev_text' => '&larr;',
+			the_posts_pagination( array(
+				'next_text' => 'Next Page &rarr;',
+				'prev_text' => '&larr;',
 					'mid_size' 	=> 2,  //show more numbers in the middle 
-			) );
+					) );
 		}else{
 			previous_posts_link('&larr; Newer Posts'); 
 			next_posts_link('Older Posts &rarr;'); 
@@ -124,7 +152,7 @@ function awesome_widget_areas(){
 		'after_widget' 	=> '</section>',
 		'before_title' 	=> '<h2 class="widget-title">',
 		'after_title'	=> '</h2>',
-	));
+		));
 
 	register_sidebar( array(
 		'name' 			=> 'Blog Sidebar',
@@ -134,7 +162,7 @@ function awesome_widget_areas(){
 		'after_widget' 	=> '</section>',
 		'before_title' 	=> '<h2 class="widget-title">',
 		'after_title'	=> '</h2>',
-	));
+		));
 
 	register_sidebar( array(
 		'name' 			=> 'Page Sidebar',
@@ -144,7 +172,7 @@ function awesome_widget_areas(){
 		'after_widget' 	=> '</section>',
 		'before_title' 	=> '<h2 class="widget-title">',
 		'after_title'	=> '</h2>',
-	));
+		));
 	register_sidebar( array(
 		'name' 			=> 'Footer Area',
 		'id' 			=> 'footer-area',
@@ -153,7 +181,7 @@ function awesome_widget_areas(){
 		'after_widget' 	=> '</section>',
 		'before_title' 	=> '<h2 class="widget-title">',
 		'after_title'	=> '</h2>',
-	));
+		));
 
 	
 }
@@ -170,5 +198,21 @@ function awesome_scripts(){
 	wp_enqueue_script( 'awesome-js', $js, array('jquery') );
 }
 
+
+
+/**
+ * Adjust the comments_number to reflect real comments 
+ * and not pingbacks, trackbacks, or moderated comments
+ */
+add_filter('get_comments_number', 'awesome_comment_count', 0);
+function awesome_comment_count( $count ) {
+	if ( ! is_admin() ) {
+		global $id;
+		$comments_by_type = &separate_comments(get_comments('status=approve&post_id=' . $id));
+		return count($comments_by_type['comment']);
+	} else {
+		return $count;
+	}
+} 
 
 //no close php!
