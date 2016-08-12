@@ -11,12 +11,20 @@
 						<?php the_title(); ?>
 					</a>
 				</h2>
+
+				<?php the_terms( get_the_id(), 'brand', '<h3>', ', ', '</h3>' ); ?>
+
 				<div class="entry-content">
 
 					<?php 			
 					the_post_thumbnail('large');
 
 					the_meta(); //a list of all custom fields
+
+					the_terms( get_the_id(), 'feature', 
+						'<h3>Features:</h3><ul class="features"><li>', 
+						'</li><li>', 
+						'</li></ul>' );
 					
 					the_content();					
 					?>
@@ -29,7 +37,7 @@
 
 	<?php }//end while ?>
 
-	<?php //TODO: make more appropriate shop pagination ?>
+	<?php awesome_pagination(); ?>
 
 	<?php }else{ ?>
 		<h2>Sorry, no posts to show</h2>
@@ -41,6 +49,6 @@
 	<!-- end #content -->
 
 
-	<?php get_sidebar(); //include sidebar.php ?>
+<?php get_sidebar('shop'); //include sidebar-shop.php ?>
 </div><!-- end wrapper -->
 <?php get_footer(); //include footer.php ?>
