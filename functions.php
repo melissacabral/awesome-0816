@@ -215,4 +215,184 @@ function awesome_comment_count( $count ) {
 	}
 } 
 
+
+/**
+ * Get some recent products with thumbnails
+ * @return mixed HTML
+ */
+function awesome_products( $number = 5 ){
+	//custom query to get up to 5 newest products
+	$product_query = new WP_Query( array(
+		'post_type' 		=> 'product',  	//any registered post type
+		'posts_per_page' 	=> $number,		//limit
+	) );
+
+	if( $product_query->have_posts() ){ ?>
+	
+	<section class="featured-products">
+		<h2>Newest Products:</h2>
+		<ul>
+		<?php while( $product_query->have_posts() ){
+				$product_query->the_post(); ?>
+			<li>
+				<a href="<?php the_permalink(); ?>">
+					<?php the_post_thumbnail( 'thumbnail' ); ?>
+					<div class="caption">
+						<h3><?php the_title(); ?></h3>
+						<div><?php echo get_post_meta( get_the_id(), 'price', true ); ?></div>
+					</div>
+				</a>
+			</li>
+		<?php } //end while ?>
+		</ul>
+	</section>
+	<?php 
+	} //end of custom loop 
+	//clean up
+	wp_reset_postdata();
+}
+
+
+/**
+ * Example of altering a default loop
+ */
+add_action( 'pre_get_posts', 'awesome_blog_exclude_cat' );
+function awesome_blog_exclude_cat( $query ){
+	if( is_home() ){
+		$query->set( 'category__not_in', array(29) );
+	}
+}
+
+
+/**
+ * Theme Customization options
+ * 1. custom "container" color
+ * 2. link color
+ * 3. choose which side the sidebar is on
+ * 2. choose from some fonts
+ */
+add_action( 'customize_register', 'awesome_customizer' );
+function awesome_customizer($wp_customize){
+	//1. register the setting for the container color
+	$wp_customize->add_setting('awesome_container_color', array( 'default' => '#ffffff' ));
+	//1. add the form control for the container color
+	$wp_customize->add_control( new WP_Customize_Color_Control( 
+		$wp_customize, 
+		'awesome_container_color_ui',
+		array(
+			'label' 	=> 'Container Color',
+			'section' 	=> 'colors', //built in
+			'settings' 	=> 'awesome_container_color', //the one added in the last step
+		)
+	) );
+
+	//2. link color setting
+	$wp_customize->add_setting( 'awesome_link_color', array('default' => '#4f92bd') );
+	$wp_customize->add_control( new WP_Customize_Color_Control(
+		$wp_customize,
+		'awesome_link_color_ui',
+		array(
+			'label' 	=> 'Link Color',
+			'section' 	=> 'colors',
+			'settings' 	=> 'awesome_link_color',
+		)
+	));
+
+	//3. add a new section for "design" options
+	$wp_customize->add_section( 'awesome_design_section', array(
+		'title' => 'Design',
+		'priority' => 30,
+	) );
+	//3. setting for sidebar position
+	$wp_customize->add_setting( 'awesome_sidebar_position', 
+		array( 'default' => 'right' ) );
+	$wp_customize->add_control( new WP_Customize_Control(
+		$wp_customize,
+		'awesome_sidebar_position_ui',
+		array(
+			'label' 	=> 'Sidebar Position',
+			'section' 	=> 'awesome_design_section',
+			'settings' 	=> 'awesome_sidebar_position',
+			'type' 		=> 'radio',
+			'choices'	=> array(
+				'left' 		=> 'Left Side',
+				'right' 	=> 'Right Side',
+			),
+		)
+	) );
+
+ 	//4. fonts dropdown
+ 	$wp_customize->add_setting( 'awesome_font', array( 'default' => 'Playfair Display' ) );
+ 	$wp_customize->add_control( new WP_Customize_Control(
+ 		$wp_customize,
+ 		'awesome_font_ui',
+ 		array(
+ 			'label' 	=> 'Heading Font',
+ 			'section' 	=> 'awesome_design_section',
+ 			'settings'	=> 'awesome_font',
+ 			'type' 		=> 'select',
+ 			'choices' 	=> array(
+ 				'Playfair Display' 	=> 'Playfair',
+ 				'Fjalla One' 		=> 'Fjalla',
+ 				'Montserrat'		=> 'Montserrat',
+ 			),
+ 		)
+ 	) );
+}
+
+//Embedded CSS for the customizations!
+add_action( 'wp_head', 'awesome_custom_css' );
+function awesome_custom_css(){
+	?>
+	<style>
+		#content{
+			background-color:<?php echo get_theme_mod( 'awesome_container_color' ); ?> ;
+		}
+		a{
+			color:<?php echo get_theme_mod( 'awesome_link_color' ); ?> ;
+		}
+		input[type=submit], button{
+			background-color: <?php echo get_theme_mod( 'awesome_link_color' ); ?>;
+			color: <?php echo awesome_contrast( get_theme_mod( 'awesome_link_color' ) ) ?> !important;
+		}
+
+		<?php if( get_theme_mod( 'awesome_sidebar_position' ) == 'left' ){ ?>
+			#sidebar{
+				float:left;
+			}
+			#content{
+				float:right;
+			}
+
+		<?php } ?>
+
+		h1, h2, h3, h4{
+			font-family:'<?php echo get_theme_mod('awesome_font'); ?>', Georgia, serif;
+		}
+	</style>
+	<?php 
+}
+
+//enqueue the google font file
+add_action( 'wp_enqueue_scripts', 'awesome_google_font' );
+function awesome_google_font(){
+	//make sure to convert spaces to '+' for the google url
+	$font = str_replace(' ', '+', get_theme_mod('awesome_font'));
+	$url = 'https://fonts.googleapis.com/css?family=' . $font;
+	wp_enqueue_style( 'awesome_font', $url );
+}
+
+
+
+//for outputting Black or White to contrast with any background
+//// https://24ways.org/2010/calculating-color-contrast/
+function awesome_contrast($hexcolor){
+	$r = hexdec(substr($hexcolor,0,2));
+	$g = hexdec(substr($hexcolor,2,2));
+	$b = hexdec(substr($hexcolor,4,2));
+	$yiq = (($r*299)+($g*587)+($b*114))/1000;
+	return ($yiq >= 128) ? 'black' : 'white';
+}
+
+
 //no close php!
