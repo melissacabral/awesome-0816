@@ -6,7 +6,14 @@
 			while( have_posts() ){ 
 				the_post();  ?>
 
-		<?php the_post_thumbnail('banner'); //custom image size - functions.php ?>	
+		<?php 
+		//show our slideshow plugin if it exists
+		if( function_exists('rad_slider') ){
+			rad_slider();
+		}else{
+			the_post_thumbnail('banner'); //custom image size - functions.php 
+		}
+		?>	
 
 		<article id="post-<?php the_id(); ?>" <?php post_class(); ?>>
 			<h2 class="entry-title"> 
@@ -44,6 +51,8 @@
 			<h2>Sorry, no posts to show</h2>
 		<?php } //end of THE LOOP ?>	
 
+
+		<?php awesome_products(4); ?>
 
 	</main>
 	<!-- end #content -->

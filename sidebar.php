@@ -1,5 +1,7 @@
 <aside id="sidebar">
 
+		<?php awesome_products(2); ?>
+
 		<?php 
 		//display the widget area (registered in functions.php)
 		if( ! dynamic_sidebar( 'blog-sidebar' ) ){ 
