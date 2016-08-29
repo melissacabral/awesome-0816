@@ -395,4 +395,85 @@ function awesome_contrast($hexcolor){
 }
 
 
+
+/**
+ * Create a custom widget
+ */
+add_action( 'widgets_init', 'awesome_register_widget' );
+function awesome_register_widget(){
+	register_widget('Awesome_Simple_Widget');
+}
+//make our widget from a copy of the built in widget class
+class Awesome_Simple_Widget extends WP_Widget{
+	//constructor function
+	function __construct(){
+		$widget_ops = array(
+			'class_name' => 'awesome_widget',
+			'description' => 'Just the most basic widget',
+		);
+		parent:: __construct( 'awesome_widget', 'Awesome Widget', $widget_ops );
+	}
+	//widget output function
+	// $args = array. arguments from register_sidebar
+	// $instance = array. current settings of one instance of this widget
+	function widget( $args, $instance ){
+		extract($args);
+
+		echo $before_widget; //<section>
+
+		$title = apply_filters( 'widget_title', $instance['title'] );
+
+		if($title){
+			echo $before_title . $title . $after_title;
+		}
+
+		//This is where the widget output goes
+		awesome_products($instance['number']);
+
+		echo $after_widget; //</section>
+	}
+
+	//admin form function
+	function form( $instance ){
+		//set up default values
+		$defaults = array(
+			'title' 	=> 'Default Title goes here',
+			'number'	=> 2,
+		);
+
+		//apply the defaults to the form values
+		$instance = wp_parse_args( (array) $instance, $defaults );
+		?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>">Title</label>
+
+			<input type="text" name="<?php echo $this->get_field_name('title'); ?>" 
+			id="<?php echo $this->get_field_id('title'); ?>" 
+			value="<?php echo $instance['title']; ?>">
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id('number'); ?>">Number of Products:</label>
+
+			<input type="number" name="<?php echo $this->get_field_name('number'); ?>" 
+			id="<?php echo $this->get_field_id('number'); ?>" 
+			value="<?php echo $instance['number']; ?>" class="tiny-text">
+		</p>
+
+		<?php
+	}
+
+	//update/sanitize function
+	function update( $new_instance, $old_instance ){
+		$instance = $old_instance;
+		
+		//sanitize each field
+		$instance['title'] = wp_filter_nohtml_kses( $new_instance['title'] );
+		$instance['number'] = wp_filter_nohtml_kses( $new_instance['number'] );
+
+		return $instance;
+	}
+}
+
+
 //no close php!
